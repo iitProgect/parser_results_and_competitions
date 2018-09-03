@@ -1,0 +1,26 @@
+Metadata-Version: 2.0
+Name: yargy
+Version: 0.11.0
+Summary: Tiny rule-based facts extraction package
+Home-page: https://github.com/natasha/yargy
+Author: Yargy contributors
+Author-email: d.a.veselov@yandex.ru
+License: MIT
+Description-Content-Type: UNKNOWN
+Keywords: natural language processing,russian morphology
+Platform: UNKNOWN
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Requires-Dist: pymorphy2 (==0.8)
+Requires-Dist: backports.functools-lru-cache (==1.3)
+Requires-Dist: intervaltree (==2.1.0)
+
+UNKNOWN
+
+
