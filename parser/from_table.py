@@ -13,7 +13,7 @@ def ExistWordFromDictInParagraph(list_words, paragraph):
     return any(elem in list_words for elem in words)
 
 document = Document('C://Users//Катя//Desktop//11_РПД _Программирование (2).docx')
-
+# document = Document('C://Users//Катя//Desktop//ПИГА 09.03.01, 2016, (4.0), Информатика и вычислительная техника (19610).docx')
 
 
 text = document.paragraphs
@@ -48,7 +48,7 @@ competitions = []
 results = []
 
 table = FindTable()
-
+print(table)
 
 #определение какой столбец за что отвечает
 key = 0
@@ -60,7 +60,6 @@ for i in table[0]:
         dict['компетенции'] = i
     elif ExistWordFromDictInParagraph(['результат'],i):
         dict['результаты'] = i
-
 
 for i in table:#i - словарь
     competitions.append(i[dict['компетенции']])
