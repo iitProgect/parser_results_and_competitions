@@ -2,8 +2,8 @@ from docx import Document
 from docx.shared import Inches
 import re
 import pymorphy2
-from yargy import Parser, rule, and_
-from yargy.predicates import gram, is_capitalized, dictionary
+#from yargy import Parser, rule, and_
+#from yargy.predicates import gram, is_capitalized, dictionary
 morph = pymorphy2.MorphAnalyzer()
 
 
@@ -39,28 +39,37 @@ def FindTable():
             data.append(row_data)
 
 
-            for j in data[0]:
-                if ExistWordFromDictInParagraph(['компетенция','результаты','ФГОС'],j):
-                    return data
+        for j in data[0]:
+            if ExistWordFromDictInParagraph(['компетенция','результаты','ФГОС'],j):
+                return data
 
 FGOS = []
 competitions = []
 results = []
+
 table = FindTable()
+
 
 #определение какой столбец за что отвечает
 key = 0
 dict={}
 for i in table[0]:
     if ExistWordFromDictInParagraph(['код','ФГОС'],i):
-        dict['ФГОС'] = 0
+        dict['ФГОС'] = i
     elif ExistWordFromDictInParagraph(['компетенция'],i):
-        dict['компетенции'] = 1
+        dict['компетенции'] = i
     elif ExistWordFromDictInParagraph(['результат'],i):
-        dict['результаты'] = 2
-    else:
-        print(i)
-print(dict)
+        dict['результаты'] = i
+
+
+for i in table:#i - словарь
+    competitions.append(i[dict['компетенции']])
+    results.append(i[dict['результаты']])
+    FGOS.append(i[dict['ФГОС']])
+
+print(FGOS)
+print(competitions)
+print(results)
 
 
 
