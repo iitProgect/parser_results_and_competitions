@@ -1,11 +1,3 @@
-from docx import Document
-from docx.shared import Inches
-import re
-import pymorphy2
-#from yargy import Parser, rule, and_
-#from yargy.predicates import gram, is_capitalized, dictionary
-morph = pymorphy2.MorphAnalyzer()
-
 list_header = ['1.1.	Цели и задачи освоения учебной дисциплины',
                '1.2.	Место учебной дисциплины в структуре образовательной программы',
                '1.3.	Перечень планируемых результатов обучения, соотнесенных с планируемыми результатами освоения образовательной программы',
@@ -111,42 +103,4 @@ list_header = ['1.1.	Цели и задачи освоения учебной д
                '7.3. Типовые контрольные задания ',
                '8. Учебно-методическое и информационное обеспечение дисциплины']
 
-def ExistWordFromDictInParagraph(list_words, paragraph):
-    words = re.findall(r"[-\w']+", paragraph)
-    words = [morph.parse(i)[0].normal_form for i in words]
-    return any(elem in list_words for elem in words)
-
-def ParagraphIsHeader(paragraph):
-    return paragraph in list_header
-
-
-# document = Document('C://Users//Катя//Desktop//11_РПД _Программирование (2).docx')
-#  document = Document('C://Users//Катя//Desktop//Корпус документов//УрФУ//Рабочие программы//Рабочие программы//ИСИТбак Математическое и информационно-технологическое обеспечение профессиональной деятельности (сдан)//Теория вероятностей.docx')
-document = Document('C://Users//Катя//Desktop//Корпус документов//УрФУ//Рабочие программы//Рабочие программы//ИСИТбак Математическое и информационно-технологическое обеспечение профессиональной деятельности (сдан)//Спец главы математики.docx')
-text = document.paragraphs
-# index = 0
-# for i in text:
-#     print(i.text)
-#     print(index)
-#     index+=1
-
-
-def FindIndexHeaderresultsCompetitions():
-    index = 0
-    for i in text:
-        if ExistWordFromDictInParagraph(['компетенция','результат'],i.text) and ParagraphIsHeader(i.text):
-            return index
-        index+=1
-
-
-print(text[FindIndexHeaderresultsCompetitions()].text)
-
-def ExtractCompetitionsAndResults():
-    index = FindIndexHeaderresultsCompetitions() + 1
-    competitions_results = ""
-    while not ParagraphIsHeader(text[index].text):
-        competitions_results += text[index].text
-        index+=1
-    return  competitions_results
-
-print (ExtractCompetitionsAndResults())
+print(len(list_header))
