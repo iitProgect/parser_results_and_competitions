@@ -48,7 +48,7 @@ competitions = []
 results = []
 
 table = FindTable()
-print(table)
+
 
 #определение какой столбец за что отвечает
 key = 0
@@ -62,9 +62,12 @@ for i in table[0]:
         dict['результаты'] = i
 
 for i in table:#i - словарь
-    competitions.append(i[dict['компетенции']])
-    results.append(i[dict['результаты']])
-    FGOS.append(i[dict['ФГОС']])
+    if 'компетенции' in dict and  not i[dict['компетенции']] == dict['компетенции']:
+        competitions.append(i[dict['компетенции']])
+    if 'результаты' in dict:
+        results.append(i[dict['результаты']])
+    if 'ФГОС' in dict:
+        FGOS.append(i[dict['ФГОС']])
 
 print(FGOS)
 print(competitions)
