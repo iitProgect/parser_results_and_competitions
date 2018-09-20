@@ -11,22 +11,25 @@ GEO = rule(
             length_eq(3)
          )
         )
-    
+
 )
 
 
 parser = Parser(GEO)
 text = '''
-В Чеченской республике  ОК-1 на день рождения ...
+В Чеченской республике  ОК-12 на день рождения ...
 Донецкая народная республика провозгласила ...
 Башня Федерация — одна из самых высоких ...
 '''
-for match in parser.findall(text):
-    print([_.value for _ in match.tokens])
+def FindFGOS(text):
+    for match in parser.findall(text):
+        code_FGOS = match.tokens[0].value+text[match.tokens[0].span[1]]+text[match.tokens[0].span[1]+1]
+        if text[match.tokens[0].span[1]+2].isdigit():
+            code_FGOS = code_FGOS + text[match.tokens[0].span[1]+2]
+        print(code_FGOS)
+        return [_.value for _ in match.tokens]
 
-
-
-
+FindFGOS(text)
 
 
 
