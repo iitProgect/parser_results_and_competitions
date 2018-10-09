@@ -102,10 +102,14 @@ list_header = ['1.1.	Цели и задачи освоения учебной д
                '7.2. Виды контроля, процедуры проведения, критерии оценивания ',
                '7.3. Типовые контрольные задания ',
                '8. Учебно-методическое и информационное обеспечение дисциплины','\n1.4. Объем дисциплины по очно-заочной форме обучения',
-               '1.4. Объем дисциплины по очной форме обучения','\n1.4. Объем дисциплины по очной форме обучения','1.4. Объем дисциплины по очно-заочной форме обучения']
+               '1.4. Объем дисциплины по очной форме обучения','\n1.4. Объем дисциплины по очной форме обучения','1.4. Объем дисциплины по очно-заочной форме обучения',
+               '\nСтруктура и содержание учебной дисциплины',
+               '2.	Структура и содержание учебной дисциплины']
 
 list_header_result = ['1.3. Планируемые результаты обучения по дисциплине ',
-                      'Перечень планируемых результатов обучения, соотнесенных с планируемыми результатами освоения образовательной программы']
+                      'Перечень планируемых результатов обучения, соотнесенных с планируемыми результатами освоения образовательной программы',
+'\nПеречень планируемых результатов обучения, соотнесенных с планируемыми результатами освоения образовательной программы',
+                      '1.3. Перечень планируемых результатов обучения, соотнесенных ']
 
 from yargy import Parser, rule, and_, or_
 from yargy.predicates import gram, is_capitalized, dictionary, is_upper, length_eq, is_title
@@ -140,20 +144,22 @@ def GetDocuments():
             documents.append(filename)
     return documents
 
-def GetIndexPart(list_header_part):
+def GetIndexPart(list_header_result):
     index = 0
     for i in document.paragraphs:
-        if i.text in list_header_part:
+        txt = i.text
+        if i.text in list_header_result:
             return index
-        index+=1
+        index += 1
 
-def GetPart(name_part):
+def GetPart(list_header_result):
     part = ""
-    index = GetIndexPart(name_part) + 1
+    index = GetIndexPart(list_header_result) + 1
     while document.paragraphs[index].text not in list_header:
         part += document.paragraphs[index].text
-        index +=1
+        index += 1
     return part
+
 
 def GetResults(part):
     dict_result = {}
@@ -193,10 +199,9 @@ def GetResultsFromTable():
 
 def FindTableResult():
     for i in document.tables:
-        for row in i.rows:
-            for cell in row.cells:
-                if table_rule.find(cell.text) is not None:
-                    return i
+        for cell in i.rows[0].cells:
+            if table_rule.find(cell.text) is not None:
+                return i
 
 def TextPrepare():
     my_table = ""
@@ -208,7 +213,7 @@ def TextPrepare():
     return my_table
 
 documents = GetDocuments()
-path = baseDir + '\\'+documents[0]
+path = baseDir + '\\'+documents[6]
 print(path)
 document = Document(path)
 part = GetPart(list_header_result)
@@ -218,3 +223,14 @@ print('entity')
 for i in results:
     print(i)
     print(results[i])
+# for i in documents:
+#     path = baseDir + '\\'+i
+#     print(path)
+#     document = Document(path)
+#     part = GetPart(list_header_result)
+#     print(part)
+#     results = GetResults(part)
+#     print('entity')
+#     for i in results:
+#         print(i)
+#         print(results[i])
