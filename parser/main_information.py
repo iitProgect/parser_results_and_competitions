@@ -17,5 +17,3 @@ documents = GetDocuments()
 path = baseDir + '\\'+documents[6]
 print(path)
 document = Document(path)
-header  = section.header
-print(document.header)
