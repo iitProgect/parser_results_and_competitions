@@ -213,7 +213,7 @@ def TextPrepare():
     return my_table
 
 documents = GetDocuments()
-path = baseDir + '\\'+documents[6]
+path = baseDir + '\\'+documents[0]
 print(path)
 document = Document(path)
 part = GetPart(list_header_result)

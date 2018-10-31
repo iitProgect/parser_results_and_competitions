@@ -23,6 +23,7 @@ from yargy.predicates import gram, is_capitalized, dictionary
 
 
 Name = rule(
+
     and_(
         gram('ADJF'),
         or_(
@@ -37,9 +38,28 @@ Name = rule(
         'университет'
     })
 )
-print(document.)
 
+Name1 = rule(
+    dictionary({
+        'институт',
+        'кафедра',
+        'университет'
+    }),
+    gram('ADJF'),
+    gram('ADJF').optional().repeatable(),
+    gram('NOUN'),
+)
 parser = Parser(Name)
+# parser = Parser(Name1)
+
+for table in document.tables:
+    for row in table.rows:
+        for cell in row.cells:
+            for match in parser.findall(cell.text):
+                print([_.value for _ in match.tokens])
+
+
+
 for i in document.paragraphs:
     for match in parser.findall(i.text):
         print([_.value for _ in match.tokens])

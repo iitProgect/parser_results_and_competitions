@@ -9,7 +9,7 @@ for dir_path, dirs, files in os.walk(baseDir):
 	for file_name in files:
 		file_path = os.path.join(dir_path, file_name)
 		file_name, file_extension = os.path.splitext(file_path)
-		if file_extension.lower() == '.doc':
+		if file_extension.lower() == '.pdf':
 			docx_file = '{0}{1}'.format(file_name, '.docx')
 			if not os.path.isfile(docx_file):
 				print('Converting: {0}'.format(file_path))
