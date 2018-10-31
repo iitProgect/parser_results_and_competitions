@@ -30,8 +30,8 @@
       <file leaf-file-name="name_rpd.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/parser/name_rpd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="17">
-              <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+            <state relative-caret-position="-204">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#0#42#0" expanded="true" />
               </folding>
@@ -114,7 +114,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/python.exe" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -257,7 +257,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.24304539" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -606,8 +605,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/parser/name_rpd.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="31" column="33" selection-start-line="31" selection-start-column="33" selection-end-line="31" selection-end-column="33" />
+        <state relative-caret-position="-204">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
           <folding>
             <element signature="e#0#42#0" expanded="true" />
           </folding>

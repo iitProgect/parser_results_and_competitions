@@ -14,8 +14,7 @@ def GetDocuments():
 from yargy.tokenizer import TokenRule
 from yargy.tokenizer import Tokenizer
 
-
-CODE_RULE = TokenRule('Code', '\d+\d+.\d+\d+.\d+\d+')
+CODE_RULE = TokenRule('Code', '\d{2}.\d{2}.\d{2}(?!\d)')
 tokenizer = Tokenizer()
 tokenizer.remove_types('EOL','LATIN','RU','INT','PUNCT','OTHER')
 tokenizer.add_rules(CODE_RULE)
@@ -25,12 +24,13 @@ tokenizer.add_rules(CODE_RULE)
 
 baseDir = r'C:\Users\Катя\Desktop\рпд'
 documents = GetDocuments()
-path = baseDir + '\\'+documents[4]
+path = baseDir + '\\'+documents[15]
 print(path)
 document = Document(path)
 def FindName():
     for i in document.paragraphs:
         if len(list(tokenizer(i.text))) > 0:
+            print(list(tokenizer(i.text)))
             return i.text
     for table in document.tables:
         for row in table.rows:
@@ -42,4 +42,3 @@ def FindName():
 
 
 print(FindName())
-
