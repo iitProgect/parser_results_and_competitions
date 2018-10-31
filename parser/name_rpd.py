@@ -25,23 +25,21 @@ tokenizer.add_rules(CODE_RULE)
 
 baseDir = r'C:\Users\Катя\Desktop\рпд'
 documents = GetDocuments()
-path = baseDir + '\\'+documents[3]
+path = baseDir + '\\'+documents[4]
 print(path)
 document = Document(path)
 def FindName():
     for i in document.paragraphs:
-        print(i.text)
         if len(list(tokenizer(i.text))) > 0:
             return i.text
-        for table in document.tables:
-            for row in table.rows:
-                for cell in row.cells:
-                    if len(list(tokenizer(cell.text))) > 0:
-                        span = list(tokenizer(cell.text))[0].span
-                        return cell.text[span[0]:cell.text.find('\n', span[0])]
+    for table in document.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                if len(list(tokenizer(cell.text))) > 0:
+                    span = list(tokenizer(cell.text))[0].span
+                    return cell.text[span[0]:cell.text.find('\n', span[0])]
 
 
-for row in document.tables[1].rows:
-    print(row.cells[0])
-# print(FindName())
+
+print(FindName())
 
