@@ -19,12 +19,26 @@ tokenizer = Tokenizer()
 tokenizer.remove_types('EOL','LATIN','RU','INT','PUNCT','OTHER')
 tokenizer.add_rules(CODE_RULE)
 
+isRPD = rule(
+    and_(dictionary({
+                'рабочая'}), is_title()),
+        dictionary({
+                'программа'}))
+
+isRPD2 = rule(
+    dictionary({
+        'дисциплина'
+    })
+)
+
+rpdRule = Parser(isRPD)
+
+# print(rpdRule.find('Рабочая программа дисциплины'))
 
 
-
-baseDir = r'C:\Users\Катя\Desktop\рпд'
+baseDir = r'C:\Users\Katia\Desktop\рпд'
 documents = GetDocuments()
-path = baseDir + '\\'+documents[13]
+path = baseDir + '\\'+documents[0]
 print(path)
 document = Document(path)
 def FindName():
@@ -36,9 +50,31 @@ def FindName():
                     return cell.text[span[0]:cell.text.find('\n', span[0])]
     for i in document.paragraphs:
         if len(list(tokenizer(i.text))) == 1:
-            print(list(tokenizer(i.text)))
             return i.text
 
 
+def FindRPD():
+    for row in document.tables[0].rows:
+        for cell in row.cells:
+            if rpdRule.find(cell.text) is not None:
+                return FindRPDInTable(cell.text)
+    index = 0
+    for i in document.paragraphs:
+        if rpdRule.find(i.text) is not None:
+            return FindRPDInParagraphs(index+1)
+        index += 1
 
-print(FindName())
+
+def FindRPDInTable(cell):
+    rpdRule = Parser(isRPD2)
+    span = rpdRule.find(cell).span
+    return cell[span[1]:cell.find('\n', span[1])]
+
+def FindRPDInParagraphs(start_index):
+    for i in document.paragraphs:
+        if document.paragraphs[start_index].text != '':
+            return document.paragraphs[start_index].text
+        start_index += 1
+
+print('направление подготовки:',FindName())
+print('рабочая программа дисциплины', FindRPD())
